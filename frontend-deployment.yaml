@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 2  # 複数の Pod を用意
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: react-app
+        image: ryanagit/react-app:v1  # 作成した Docker イメージ
+        ports:
+        - containerPort: 80  # Nginx がリッスンするポート

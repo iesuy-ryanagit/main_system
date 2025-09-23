@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: go-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: go-app
@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: go-app
-          image: go-app:latest
-          imagePullPolicy: IfNotPresent
+          image: ryanagit/demo:v2
+          imagePullPolicy: Never
           ports:
             - containerPort: 8080
           env:
@@ -23,3 +23,5 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+            - name: MYSQL_DSN
+              value: "user:password@tcp(mysql-service:3306)/pocket"
